@@ -128,6 +128,8 @@ bool scry_sdlg_table_payload(const scry_sdlg_view* view, const scry_sdlg_table_e
 
 bool scry_sdlg_string_at(const scry_sdlg_view* view, uint32_t string_id, scry_sdlg_string* out_string)
 {
+	uint32_t offset = 0U;
+
 	ASSERT_FATAL(view);
 	ASSERT_FATAL(out_string);
 
@@ -135,8 +137,6 @@ bool scry_sdlg_string_at(const scry_sdlg_view* view, uint32_t string_id, scry_sd
 	{
 		return false;
 	}
-
-	uint32_t offset = 0U;
 
 	if (!scry_sdlg_read_string_index_entry(view, string_id, &offset))
 	{
@@ -209,7 +209,8 @@ static bool scry_sdlg_validate_table_entries(const scry_sdlg_view* view)
 
 	for (uint32_t i = 0U; i < view->header.table_count; ++i)
 	{
-		scry_sdlg_table_entry table = { 0 };
+		scry_sdlg_table_entry table		= { 0 };
+		size_t			  table_end = 0U;
 
 		if (!scry_sdlg_read_table_entry(view, i, &table))
 		{
@@ -236,7 +237,7 @@ static bool scry_sdlg_validate_table_entries(const scry_sdlg_view* view)
 			return false;
 		}
 
-		const size_t table_end = (size_t)table.offset + (size_t)table.size;
+		table_end = (size_t)table.offset + (size_t)table.size;
 
 		if ((size_t)table.offset < directory_end)
 		{
