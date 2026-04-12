@@ -1,0 +1,108 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "SCRYBE: Clean",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-E",
+                "rm",
+                "-rf",
+                "${workspaceFolder}/build",
+                "${workspaceFolder}/.cmake_preset",
+                "${workspaceFolder}/compile_commands.json"
+            ],
+            "presentation": { "panel": "shared", "reveal": "always" }
+        },
+
+        {
+            "label": "SCRYBE: Configure Release",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "cmake -E rm -rf build && cmake --preset release -DSCRYBE_ENABLE_ASAN=OFF && echo release > .cmake_preset && ln -sfn build/release/compile_commands.json compile_commands.json"
+            ],
+            "presentation": { "panel": "shared", "reveal": "always" }
+        },
+
+        {
+            "label": "SCRYBE: Configure Release (ASAN)",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "cmake -E rm -rf build && cmake --preset release -DSCRYBE_ENABLE_ASAN=ON && echo release > .cmake_preset && ln -sfn build/release/compile_commands.json compile_commands.json"
+            ],
+            "presentation": { "panel": "shared", "reveal": "always" }
+        },
+
+        {
+            "label": "SCRYBE: Configure Debug",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "cmake -E rm -rf build && cmake --preset debug -DSCRYBE_ENABLE_ASAN=OFF && echo debug > .cmake_preset && ln -sfn build/debug/compile_commands.json compile_commands.json"
+            ],
+            "presentation": { "panel": "shared", "reveal": "always" }
+        },
+
+        {
+            "label": "SCRYBE: Configure Debug (ASAN)",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "cmake -E rm -rf build && cmake --preset debug -DSCRYBE_ENABLE_ASAN=ON && echo debug > .cmake_preset && ln -sfn build/debug/compile_commands.json compile_commands.json"
+            ],
+            "presentation": { "panel": "shared", "reveal": "always" }
+        },
+
+        {
+            "label": "SCRYBE: Build",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "cmake --build --preset $(cat .cmake_preset)"
+            ],
+            "group": { "kind": "build", "isDefault": true },
+            "presentation": { "panel": "shared", "reveal": "always" }
+        },
+
+        {
+            "label": "SCRYBE: Run",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "cmake --build --preset $(cat .cmake_preset) --target run"
+            ],
+            "dependsOn": ["SCRYBE: Build"],
+            "presentation": {
+                "panel": "shared",
+                "reveal": "always",
+                "focus": true
+            }
+        },
+
+        {
+            "label": "SCRYBE: Manual Dialogue Test",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "preset=$(cat .cmake_preset) && cmake --build --preset \"$preset\" --target SCRYBE_manual_dialogue_test && \"${workspaceFolder}/build/$preset/SCRYBE_manual_dialogue_test\""
+            ],
+            "dependsOn": ["SCRYBE: Build"],
+            "group": { "kind": "test", "isDefault": true },
+            "presentation": {
+                "panel": "shared",
+                "reveal": "always",
+                "focus": true
+            }
+        }
+    ]
+}

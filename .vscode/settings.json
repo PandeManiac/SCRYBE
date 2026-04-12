@@ -1,0 +1,19 @@
+{
+    "clangd.arguments": [
+        "--compile-commands-dir=${workspaceFolder}"
+    ],
+
+    "cmake.useCMakePresets": "always",
+    "cmake.configureOnOpen": false,
+
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "xaver.clang-format",
+
+    "[c]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+
+    "git.ignoreLimitWarning": true,
+
+	"workspaceKeybindings.scrybe": true
+}
