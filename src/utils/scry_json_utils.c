@@ -1,5 +1,4 @@
 #include "utils/scry_json_utils.h"
-
 #include "utils/scry_assert.h"
 
 bool scry_json_get_typed(json_object* obj, const char* key, json_type type, json_object** out_value)
@@ -13,9 +12,8 @@ bool scry_json_get_typed(json_object* obj, const char* key, json_type type, json
 
 bool scry_json_get_string(json_object* obj, const char* key, const char** out_value)
 {
-	json_object* value = NULL;
-
 	ASSERT_FATAL(out_value);
+	json_object* value = NULL;
 
 	if (!scry_json_get_typed(obj, key, json_type_string, &value))
 	{
@@ -88,9 +86,7 @@ bool scry_json_add_string(json_object* obj, const char* key, const char* value)
 	ASSERT_FATAL(key);
 	ASSERT_FATAL(value);
 
-	json_object* json_value = NULL;
-
-	json_value = json_object_new_string(value);
+	json_object* json_value = json_object_new_string(value);
 	return json_value != NULL && scry_json_object_add_owned(obj, key, json_value);
 }
 
@@ -108,9 +104,7 @@ bool scry_json_add_i64(json_object* obj, const char* key, int64_t value)
 	ASSERT_FATAL(obj);
 	ASSERT_FATAL(key);
 
-	json_object* json_value = NULL;
-
-	json_value = json_object_new_int64(value);
+	json_object* json_value = json_object_new_int64(value);
 	return json_value != NULL && scry_json_object_add_owned(obj, key, json_value);
 }
 
@@ -119,9 +113,7 @@ bool scry_json_add_bool(json_object* obj, const char* key, bool value)
 	ASSERT_FATAL(obj);
 	ASSERT_FATAL(key);
 
-	json_object* json_value = NULL;
-
-	json_value = json_object_new_boolean(value);
+	json_object* json_value = json_object_new_boolean(value);
 	return json_value != NULL && scry_json_object_add_owned(obj, key, json_value);
 }
 
@@ -130,9 +122,7 @@ bool scry_json_add_f64(json_object* obj, const char* key, double value)
 	ASSERT_FATAL(obj);
 	ASSERT_FATAL(key);
 
-	json_object* json_value = NULL;
-
-	json_value = json_object_new_double(value);
+	json_object* json_value = json_object_new_double(value);
 	return json_value != NULL && scry_json_object_add_owned(obj, key, json_value);
 }
 

@@ -26,23 +26,23 @@ typedef enum scry_action_trigger
 
 typedef struct scry_action
 {
-	scry_action_id	   id;
-	scry_action_source source;
+	scry_action_id		id;
+	scry_action_source	source;
 	scry_action_trigger trigger;
-	int				   code;
-	scry_modifier_mask modifiers;
-	double			   x;
-	double			   y;
-	uint32_t		   text;
+	int					code;
+	scry_modifier_mask	modifiers;
+	double				x;
+	double				y;
+	uint32_t			text;
 } scry_action;
 
 typedef struct scry_action_binding
 {
-	scry_action_id	   id;
-	scry_action_source source;
+	scry_action_id		id;
+	scry_action_source	source;
 	scry_action_trigger trigger;
-	int				   code;
-	scry_modifier_mask modifiers;
+	int					code;
+	scry_modifier_mask	modifiers;
 } scry_action_binding;
 
 struct scry_action_map;
@@ -54,7 +54,7 @@ typedef struct scry_action_map
 	const scry_action_binding* bindings;
 	uint32_t				   binding_count;
 	void*					   user_data;
-	scry_action_map_handle_fn handle;
+	scry_action_map_handle_fn  handle;
 } scry_action_map;
 
 typedef struct scry_action_stack

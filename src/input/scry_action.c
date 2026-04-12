@@ -51,7 +51,7 @@ bool scry_action_stack_dispatch(scry_action_stack* stack, const scry_input* inpu
 	ASSERT_FATAL(stack);
 	ASSERT_FATAL(input);
 
-	bool				 consumed  = false;
+	bool					 consumed  = false;
 	const scry_modifier_mask modifiers = scry_input_modifiers(input);
 
 	for (int key = 0; key <= GLFW_KEY_LAST; ++key)
@@ -61,14 +61,14 @@ bool scry_action_stack_dispatch(scry_action_stack* stack, const scry_input* inpu
 		if (state->pressed)
 		{
 			const scry_action action = {
-				.id = 0U,
-				.source = SCRY_ACTION_SOURCE_KEY,
-				.trigger = SCRY_ACTION_TRIGGER_PRESSED,
-				.code = key,
+				.id		   = 0U,
+				.source	   = SCRY_ACTION_SOURCE_KEY,
+				.trigger   = SCRY_ACTION_TRIGGER_PRESSED,
+				.code	   = key,
 				.modifiers = modifiers,
-				.x = 0.0,
-				.y = 0.0,
-				.text = 0U,
+				.x		   = 0.0,
+				.y		   = 0.0,
+				.text	   = 0U,
 			};
 
 			consumed = scry_action_stack_dispatch_action(stack, &action) || consumed;
@@ -77,14 +77,14 @@ bool scry_action_stack_dispatch(scry_action_stack* stack, const scry_input* inpu
 		if (state->released)
 		{
 			const scry_action action = {
-				.id = 0U,
-				.source = SCRY_ACTION_SOURCE_KEY,
-				.trigger = SCRY_ACTION_TRIGGER_RELEASED,
-				.code = key,
+				.id		   = 0U,
+				.source	   = SCRY_ACTION_SOURCE_KEY,
+				.trigger   = SCRY_ACTION_TRIGGER_RELEASED,
+				.code	   = key,
 				.modifiers = modifiers,
-				.x = 0.0,
-				.y = 0.0,
-				.text = 0U,
+				.x		   = 0.0,
+				.y		   = 0.0,
+				.text	   = 0U,
 			};
 
 			consumed = scry_action_stack_dispatch_action(stack, &action) || consumed;
@@ -93,14 +93,14 @@ bool scry_action_stack_dispatch(scry_action_stack* stack, const scry_input* inpu
 		if (state->repeated)
 		{
 			const scry_action action = {
-				.id = 0U,
-				.source = SCRY_ACTION_SOURCE_KEY,
-				.trigger = SCRY_ACTION_TRIGGER_REPEATED,
-				.code = key,
+				.id		   = 0U,
+				.source	   = SCRY_ACTION_SOURCE_KEY,
+				.trigger   = SCRY_ACTION_TRIGGER_REPEATED,
+				.code	   = key,
 				.modifiers = modifiers,
-				.x = 0.0,
-				.y = 0.0,
-				.text = 0U,
+				.x		   = 0.0,
+				.y		   = 0.0,
+				.text	   = 0U,
 			};
 
 			consumed = scry_action_stack_dispatch_action(stack, &action) || consumed;
@@ -109,14 +109,14 @@ bool scry_action_stack_dispatch(scry_action_stack* stack, const scry_input* inpu
 		if (state->down)
 		{
 			const scry_action action = {
-				.id = 0U,
-				.source = SCRY_ACTION_SOURCE_KEY,
-				.trigger = SCRY_ACTION_TRIGGER_DOWN,
-				.code = key,
+				.id		   = 0U,
+				.source	   = SCRY_ACTION_SOURCE_KEY,
+				.trigger   = SCRY_ACTION_TRIGGER_DOWN,
+				.code	   = key,
 				.modifiers = modifiers,
-				.x = 0.0,
-				.y = 0.0,
-				.text = 0U,
+				.x		   = 0.0,
+				.y		   = 0.0,
+				.text	   = 0U,
 			};
 
 			consumed = scry_action_stack_dispatch_action(stack, &action) || consumed;
@@ -130,14 +130,14 @@ bool scry_action_stack_dispatch(scry_action_stack* stack, const scry_input* inpu
 		if (state->pressed)
 		{
 			const scry_action action = {
-				.id = 0U,
-				.source = SCRY_ACTION_SOURCE_MOUSE_BUTTON,
-				.trigger = SCRY_ACTION_TRIGGER_PRESSED,
-				.code = button,
+				.id		   = 0U,
+				.source	   = SCRY_ACTION_SOURCE_MOUSE_BUTTON,
+				.trigger   = SCRY_ACTION_TRIGGER_PRESSED,
+				.code	   = button,
 				.modifiers = modifiers,
-				.x = input->mouse_x,
-				.y = input->mouse_y,
-				.text = 0U,
+				.x		   = input->mouse_x,
+				.y		   = input->mouse_y,
+				.text	   = 0U,
 			};
 
 			consumed = scry_action_stack_dispatch_action(stack, &action) || consumed;
@@ -146,14 +146,14 @@ bool scry_action_stack_dispatch(scry_action_stack* stack, const scry_input* inpu
 		if (state->released)
 		{
 			const scry_action action = {
-				.id = 0U,
-				.source = SCRY_ACTION_SOURCE_MOUSE_BUTTON,
-				.trigger = SCRY_ACTION_TRIGGER_RELEASED,
-				.code = button,
+				.id		   = 0U,
+				.source	   = SCRY_ACTION_SOURCE_MOUSE_BUTTON,
+				.trigger   = SCRY_ACTION_TRIGGER_RELEASED,
+				.code	   = button,
 				.modifiers = modifiers,
-				.x = input->mouse_x,
-				.y = input->mouse_y,
-				.text = 0U,
+				.x		   = input->mouse_x,
+				.y		   = input->mouse_y,
+				.text	   = 0U,
 			};
 
 			consumed = scry_action_stack_dispatch_action(stack, &action) || consumed;
@@ -162,14 +162,14 @@ bool scry_action_stack_dispatch(scry_action_stack* stack, const scry_input* inpu
 		if (state->down)
 		{
 			const scry_action action = {
-				.id = 0U,
-				.source = SCRY_ACTION_SOURCE_MOUSE_BUTTON,
-				.trigger = SCRY_ACTION_TRIGGER_DOWN,
-				.code = button,
+				.id		   = 0U,
+				.source	   = SCRY_ACTION_SOURCE_MOUSE_BUTTON,
+				.trigger   = SCRY_ACTION_TRIGGER_DOWN,
+				.code	   = button,
 				.modifiers = modifiers,
-				.x = input->mouse_x,
-				.y = input->mouse_y,
-				.text = 0U,
+				.x		   = input->mouse_x,
+				.y		   = input->mouse_y,
+				.text	   = 0U,
 			};
 
 			consumed = scry_action_stack_dispatch_action(stack, &action) || consumed;
@@ -179,14 +179,14 @@ bool scry_action_stack_dispatch(scry_action_stack* stack, const scry_input* inpu
 	if (input->scroll_x != 0.0 || input->scroll_y != 0.0)
 	{
 		const scry_action action = {
-			.id = 0U,
-			.source = SCRY_ACTION_SOURCE_SCROLL,
-			.trigger = SCRY_ACTION_TRIGGER_CHANGED,
-			.code = 0,
+			.id		   = 0U,
+			.source	   = SCRY_ACTION_SOURCE_SCROLL,
+			.trigger   = SCRY_ACTION_TRIGGER_CHANGED,
+			.code	   = 0,
 			.modifiers = modifiers,
-			.x = input->scroll_x,
-			.y = input->scroll_y,
-			.text = 0U,
+			.x		   = input->scroll_x,
+			.y		   = input->scroll_y,
+			.text	   = 0U,
 		};
 
 		consumed = scry_action_stack_dispatch_action(stack, &action) || consumed;
@@ -195,14 +195,14 @@ bool scry_action_stack_dispatch(scry_action_stack* stack, const scry_input* inpu
 	for (size_t i = 0; i < input->text_count; ++i)
 	{
 		const scry_action action = {
-			.id = 0U,
-			.source = SCRY_ACTION_SOURCE_TEXT,
-			.trigger = SCRY_ACTION_TRIGGER_CHANGED,
-			.code = 0,
+			.id		   = 0U,
+			.source	   = SCRY_ACTION_SOURCE_TEXT,
+			.trigger   = SCRY_ACTION_TRIGGER_CHANGED,
+			.code	   = 0,
 			.modifiers = modifiers,
-			.x = 0.0,
-			.y = 0.0,
-			.text = input->text[i],
+			.x		   = 0.0,
+			.y		   = 0.0,
+			.text	   = input->text[i],
 		};
 
 		consumed = scry_action_stack_dispatch_action(stack, &action) || consumed;
@@ -234,7 +234,7 @@ static bool scry_action_stack_dispatch_action(scry_action_stack* stack, const sc
 			}
 
 			scry_action resolved_action = *action;
-			resolved_action.id		   = binding->id;
+			resolved_action.id			= binding->id;
 
 			if (map->handle(map, &resolved_action))
 			{

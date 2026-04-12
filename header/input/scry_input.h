@@ -16,12 +16,12 @@ typedef uint32_t scry_modifier_mask;
 
 enum
 {
-	SCRY_MODIFIER_SHIFT = 1U << 0,
-	SCRY_MODIFIER_CONTROL = 1U << 1,
-	SCRY_MODIFIER_ALT = 1U << 2,
-	SCRY_MODIFIER_SUPER = 1U << 3,
+	SCRY_MODIFIER_SHIFT		= 1U << 0,
+	SCRY_MODIFIER_CONTROL	= 1U << 1,
+	SCRY_MODIFIER_ALT		= 1U << 2,
+	SCRY_MODIFIER_SUPER		= 1U << 3,
 	SCRY_MODIFIER_CAPS_LOCK = 1U << 4,
-	SCRY_MODIFIER_NUM_LOCK = 1U << 5,
+	SCRY_MODIFIER_NUM_LOCK	= 1U << 5,
 };
 
 enum
@@ -46,7 +46,7 @@ typedef struct scry_button_state
 
 typedef struct scry_input
 {
-	scry_key_state	 keys[GLFW_KEY_LAST + 1];
+	scry_key_state	  keys[GLFW_KEY_LAST + 1];
 	scry_button_state mouse_buttons[GLFW_MOUSE_BUTTON_LAST + 1];
 
 	double mouse_x;
@@ -82,11 +82,11 @@ bool scry_input_mouse_down(const scry_input* input, int button);
 bool scry_input_mouse_pressed(const scry_input* input, int button);
 bool scry_input_mouse_released(const scry_input* input, int button);
 
-void scry_input_on_key(scry_input* input, int key, int action);
-void scry_input_on_mouse_button(scry_input* input, int button, int action);
-void scry_input_on_cursor_position(scry_input* input, double x, double y);
-void scry_input_on_scroll(scry_input* input, double xoffset, double yoffset);
-void scry_input_on_text(scry_input* input, uint32_t codepoint);
-void scry_input_on_cursor_enter(scry_input* input, bool entered);
-void scry_input_on_focus(scry_input* input, bool focused);
+void			   scry_input_on_key(scry_input* input, int key, int action);
+void			   scry_input_on_mouse_button(scry_input* input, int button, int action);
+void			   scry_input_on_cursor_position(scry_input* input, double x, double y);
+void			   scry_input_on_scroll(scry_input* input, double xoffset, double yoffset);
+void			   scry_input_on_text(scry_input* input, uint32_t codepoint);
+void			   scry_input_on_cursor_enter(scry_input* input, bool entered);
+void			   scry_input_on_focus(scry_input* input, bool focused);
 scry_modifier_mask scry_input_modifiers(const scry_input* input);

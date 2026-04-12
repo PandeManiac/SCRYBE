@@ -21,26 +21,26 @@ void scry_input_begin_frame(scry_input* input)
 
 	for (size_t i = 0; i < (size_t)(GLFW_KEY_LAST + 1); ++i)
 	{
-		input->keys[i].pressed  = false;
+		input->keys[i].pressed	= false;
 		input->keys[i].released = false;
 		input->keys[i].repeated = false;
 	}
 
 	for (size_t i = 0; i < (size_t)(GLFW_MOUSE_BUTTON_LAST + 1); ++i)
 	{
-		input->mouse_buttons[i].pressed  = false;
+		input->mouse_buttons[i].pressed	 = false;
 		input->mouse_buttons[i].released = false;
 	}
 
-	input->mouse_dx	   = 0.0;
-	input->mouse_dy	   = 0.0;
-	input->scroll_x	   = 0.0;
-	input->scroll_y	   = 0.0;
+	input->mouse_dx		  = 0.0;
+	input->mouse_dy		  = 0.0;
+	input->scroll_x		  = 0.0;
+	input->scroll_y		  = 0.0;
 	input->cursor_entered = false;
-	input->cursor_left = false;
-	input->focus_gained = false;
-	input->focus_lost   = false;
-	input->text_count   = 0U;
+	input->cursor_left	  = false;
+	input->focus_gained	  = false;
+	input->focus_lost	  = false;
+	input->text_count	  = 0U;
 }
 
 bool scry_input_key_down(const scry_input* input, int key)
@@ -100,15 +100,15 @@ void scry_input_on_key(scry_input* input, int key, int action)
 	{
 		case GLFW_PRESS:
 			state->pressed = !state->down;
-			state->down	 = true;
+			state->down	   = true;
 			break;
 		case GLFW_RELEASE:
 			state->released = state->down;
-			state->down	   = false;
+			state->down		= false;
 			break;
 		case GLFW_REPEAT:
 			state->repeated = true;
-			state->down	 = true;
+			state->down		= true;
 			break;
 		default:
 			break;
@@ -130,11 +130,11 @@ void scry_input_on_mouse_button(scry_input* input, int button, int action)
 	{
 		case GLFW_PRESS:
 			state->pressed = !state->down;
-			state->down	 = true;
+			state->down	   = true;
 			break;
 		case GLFW_RELEASE:
 			state->released = state->down;
-			state->down	   = false;
+			state->down		= false;
 			break;
 		default:
 			break;
@@ -155,8 +155,8 @@ void scry_input_on_cursor_position(scry_input* input, double x, double y)
 		input->mouse_position_valid = true;
 	}
 
-	input->mouse_x   = x;
-	input->mouse_y   = y;
+	input->mouse_x = x;
+	input->mouse_y = y;
 }
 
 void scry_input_on_scroll(scry_input* input, double xoffset, double yoffset)
@@ -183,9 +183,9 @@ void scry_input_on_cursor_enter(scry_input* input, bool entered)
 {
 	ASSERT_FATAL(input);
 
-	input->cursor_inside = entered;
+	input->cursor_inside  = entered;
 	input->cursor_entered = entered;
-	input->cursor_left   = !entered;
+	input->cursor_left	  = !entered;
 }
 
 void scry_input_on_focus(scry_input* input, bool focused)
@@ -197,9 +197,9 @@ void scry_input_on_focus(scry_input* input, bool focused)
 		return;
 	}
 
-	input->focused	 = focused;
+	input->focused		= focused;
 	input->focus_gained = focused;
-	input->focus_lost   = !focused;
+	input->focus_lost	= !focused;
 
 	if (!focused)
 	{

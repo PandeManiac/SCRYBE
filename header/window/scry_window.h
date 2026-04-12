@@ -30,10 +30,10 @@ typedef struct scry_window
 	GLFWwindow*		   handle;
 } scry_window;
 
-void scry_window_init(scry_window* const window, const scry_window_config* config);
-void scry_window_destroy(scry_window* const window);
-bool scry_window_should_close(const scry_window* const window);
-void scry_window_update_input(scry_window* window, double timeout_seconds);
+void			  scry_window_init(scry_window* const window, const scry_window_config* config);
+void			  scry_window_destroy(scry_window* const window);
+bool			  scry_window_should_close(const scry_window* const window);
+void			  scry_window_update_input(scry_window* window, double timeout_seconds);
 const scry_input* scry_window_get_input(const scry_window* window);
-void scry_window_swap_buffers(const scry_window* window);
-void scry_window_get_framebuffer_size(const scry_window* window, int* out_width, int* out_height);
+void			  scry_window_swap_buffers(const scry_window* window);
+void			  scry_window_get_framebuffer_size(const scry_window* window, int* out_width, int* out_height);
