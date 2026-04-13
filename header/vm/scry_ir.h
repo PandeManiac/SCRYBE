@@ -3,6 +3,7 @@
 #include "utils/core/scry_assert.h"
 
 #include <stdbool.h>
+#include <stddef.h>
 #include <stdint.h>
 
 typedef enum scry_ir_node_kind
@@ -100,9 +101,27 @@ typedef struct scry_ir_program
 	uint32_t					 entry_node_index;
 } scry_ir_program;
 
+typedef struct scry_ir_program_builder
+{
+	scry_ir_node*		   nodes;
+	scry_ir_choice_option* choice_options;
+	scry_ir_switch_case*   switch_cases;
+	uint32_t			   node_count;
+	uint32_t			   choice_option_count;
+	uint32_t			   switch_case_count;
+	size_t				   node_capacity;
+	size_t				   choice_option_capacity;
+	size_t				   switch_case_capacity;
+	uint32_t			   string_count;
+	uint32_t			   variable_count;
+	uint32_t			   entry_node_index;
+	bool				   has_entry_node;
+} scry_ir_program_builder;
+
 bool		 scry_ir_node_kind_is_valid(scry_ir_node_kind kind);
 bool		 scry_ir_compare_op_is_valid(scry_ir_compare_op compare_op);
 void		 scry_ir_program_init(scry_ir_program* program);
+void		 scry_ir_program_destroy(scry_ir_program* program);
 void		 scry_ir_node_init(scry_ir_node* node);
 scry_ir_node scry_ir_make_dialogue_node(uint32_t string_id, uint32_t next_node_index);
 scry_ir_node scry_ir_make_jump_node(uint32_t target_node_index);
@@ -110,4 +129,22 @@ scry_ir_node scry_ir_make_branch_node(scry_ir_condition condition, uint32_t true
 scry_ir_node scry_ir_make_choice_node(uint32_t option_start, uint32_t option_count);
 scry_ir_node scry_ir_make_switch_node(uint32_t variable_id, uint32_t case_start, uint32_t case_count, uint32_t default_node_index);
 scry_ir_node scry_ir_make_end_node(void);
-bool		 scry_ir_program_validate(const scry_ir_program* program);
+void		 scry_ir_program_builder_init(scry_ir_program_builder* builder, uint32_t string_count, uint32_t variable_count);
+void		 scry_ir_program_builder_destroy(scry_ir_program_builder* builder);
+bool		 scry_ir_program_builder_set_entry_node(scry_ir_program_builder* builder, uint32_t entry_node_index);
+bool		 scry_ir_program_builder_add_dialogue_node(scry_ir_program_builder* builder, uint32_t string_id, uint32_t* out_node_index);
+bool		 scry_ir_program_builder_add_jump_node(scry_ir_program_builder* builder, uint32_t* out_node_index);
+bool		 scry_ir_program_builder_add_branch_node(scry_ir_program_builder* builder, scry_ir_condition condition, uint32_t* out_node_index);
+bool		 scry_ir_program_builder_add_choice_node(scry_ir_program_builder* builder, uint32_t* out_node_index);
+bool		 scry_ir_program_builder_add_switch_node(scry_ir_program_builder* builder, uint32_t variable_id, uint32_t* out_node_index);
+bool		 scry_ir_program_builder_add_end_node(scry_ir_program_builder* builder, uint32_t* out_node_index);
+bool		 scry_ir_program_builder_link(scry_ir_program_builder* builder, uint32_t node_index, uint32_t target_node_index);
+bool		 scry_ir_program_builder_link_branch_true(scry_ir_program_builder* builder, uint32_t node_index, uint32_t target_node_index);
+bool		 scry_ir_program_builder_link_branch_false(scry_ir_program_builder* builder, uint32_t node_index, uint32_t target_node_index);
+bool		 scry_ir_program_builder_set_switch_default(scry_ir_program_builder* builder, uint32_t node_index, uint32_t target_node_index);
+bool scry_ir_program_builder_append_choice_option(scry_ir_program_builder* builder, uint32_t node_index, uint32_t text_string_id, uint32_t* out_option_index);
+bool scry_ir_program_builder_link_choice_option(scry_ir_program_builder* builder, uint32_t option_index, uint32_t target_node_index);
+bool scry_ir_program_builder_append_switch_case(scry_ir_program_builder* builder, uint32_t node_index, int32_t value, uint32_t* out_case_index);
+bool scry_ir_program_builder_link_switch_case(scry_ir_program_builder* builder, uint32_t case_index, uint32_t target_node_index);
+bool scry_ir_program_builder_build(scry_ir_program_builder* builder, scry_ir_program* out_program);
+bool scry_ir_program_validate(const scry_ir_program* program);
