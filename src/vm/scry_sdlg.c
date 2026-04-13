@@ -29,7 +29,7 @@ bool scry_sdlg_header_init(scry_sdlg_header* header)
 
 bool scry_sdlg_header_validate(const scry_sdlg_header* header, size_t file_size)
 {
-	const uint32_t header_end = (uint32_t)SCRY_SDLG_HEADER_SIZE;
+	const uint32_t header_end		 = (uint32_t)SCRY_SDLG_HEADER_SIZE;
 	const uint32_t string_index_size = (uint32_t)((size_t)header->string_count * sizeof(scry_sdlg_string_index_entry));
 
 	ASSERT_FATAL(header);
@@ -394,7 +394,7 @@ static bool scry_sdlg_read_u32_le(const uint8_t* buffer, size_t buffer_size, siz
 	}
 
 	*out_value = (uint32_t)buffer[*offset + 0U] | ((uint32_t)buffer[*offset + 1U] << 8U) | ((uint32_t)buffer[*offset + 2U] << 16U) |
-					 ((uint32_t)buffer[*offset + 3U] << 24U);
+				 ((uint32_t)buffer[*offset + 3U] << 24U);
 	*offset += 4U;
 	return true;
 }

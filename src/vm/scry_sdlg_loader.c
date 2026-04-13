@@ -210,7 +210,7 @@ static bool scry_sdlg_validate_table_entries(const scry_sdlg_view* view)
 	for (uint32_t i = 0U; i < view->header.table_count; ++i)
 	{
 		scry_sdlg_table_entry table		= { 0 };
-		size_t			  table_end = 0U;
+		size_t				  table_end = 0U;
 
 		if (!scry_sdlg_read_table_entry(view, i, &table))
 		{

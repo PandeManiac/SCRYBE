@@ -21,21 +21,25 @@ typedef struct scry_sdlg_disassembly_switch_case
 static const char* scry_sdlg_disassembly_opcode_name(uint8_t opcode);
 static const char* scry_sdlg_disassembly_compare_name(uint64_t compare_op);
 static const char* scry_sdlg_disassembly_table_name(uint16_t table_kind);
-static bool scry_sdlg_disassembly_print_header(const scry_sdlg_view* view, FILE* output);
-static bool scry_sdlg_disassembly_print_instructions(const scry_sdlg_view* view, FILE* output);
-static bool scry_sdlg_disassembly_print_instruction(const scry_sdlg_view* view, FILE* output, size_t* cursor, uint32_t instruction_index);
-static bool scry_sdlg_disassembly_print_tables(const scry_sdlg_view* view, FILE* output);
-static bool scry_sdlg_disassembly_print_choice_table(
-	const scry_sdlg_view* view, FILE* output, uint32_t table_index, const scry_sdlg_table_entry* table, size_t base_ip);
-static bool scry_sdlg_disassembly_print_switch_table(
-	const scry_sdlg_view* view, FILE* output, uint32_t table_index, const scry_sdlg_table_entry* table, size_t base_ip);
-static bool scry_sdlg_disassembly_print_strings(const scry_sdlg_view* view, FILE* output);
-static bool scry_sdlg_disassembly_print_jump_target(FILE* output, size_t base_ip, int64_t delta, size_t instruction_size);
-static bool scry_sdlg_disassembly_print_string_literal(FILE* output, const char* data, size_t length);
-static bool scry_sdlg_disassembly_read_choice_option(
-	const scry_sdlg_span* payload, uint16_t option_index, scry_sdlg_disassembly_choice_option* out_option);
-static bool scry_sdlg_disassembly_read_switch_case(
-	const scry_sdlg_span* payload, uint16_t case_index, scry_sdlg_disassembly_switch_case* out_case);
+static bool		   scry_sdlg_disassembly_print_header(const scry_sdlg_view* view, FILE* output);
+static bool		   scry_sdlg_disassembly_print_instructions(const scry_sdlg_view* view, FILE* output);
+static bool		   scry_sdlg_disassembly_print_instruction(const scry_sdlg_view* view, FILE* output, size_t* cursor, uint32_t instruction_index);
+static bool		   scry_sdlg_disassembly_print_tables(const scry_sdlg_view* view, FILE* output);
+static bool		   scry_sdlg_disassembly_print_choice_table(const scry_sdlg_view*		 view,
+															FILE*						 output,
+															uint32_t					 table_index,
+															const scry_sdlg_table_entry* table,
+															size_t						 base_ip);
+static bool		   scry_sdlg_disassembly_print_switch_table(const scry_sdlg_view*		 view,
+															FILE*						 output,
+															uint32_t					 table_index,
+															const scry_sdlg_table_entry* table,
+															size_t						 base_ip);
+static bool		   scry_sdlg_disassembly_print_strings(const scry_sdlg_view* view, FILE* output);
+static bool		   scry_sdlg_disassembly_print_jump_target(FILE* output, size_t base_ip, int64_t delta, size_t instruction_size);
+static bool		   scry_sdlg_disassembly_print_string_literal(FILE* output, const char* data, size_t length);
+static bool scry_sdlg_disassembly_read_choice_option(const scry_sdlg_span* payload, uint16_t option_index, scry_sdlg_disassembly_choice_option* out_option);
+static bool scry_sdlg_disassembly_read_switch_case(const scry_sdlg_span* payload, uint16_t case_index, scry_sdlg_disassembly_switch_case* out_case);
 static bool scry_sdlg_disassembly_read_u16_le(const uint8_t* data, size_t size, size_t offset, uint16_t* out_value);
 static bool scry_sdlg_disassembly_read_u32_le(const uint8_t* data, size_t size, size_t offset, uint32_t* out_value);
 static bool scry_sdlg_disassembly_read_s32_le(const uint8_t* data, size_t size, size_t offset, int32_t* out_value);
@@ -167,7 +171,7 @@ static bool scry_sdlg_disassembly_print_header(const scry_sdlg_view* view, FILE*
 
 static bool scry_sdlg_disassembly_print_instructions(const scry_sdlg_view* view, FILE* output)
 {
-	size_t	 cursor			  = 0U;
+	size_t	 cursor			   = 0U;
 	uint32_t instruction_index = 0U;
 
 	ASSERT_FATAL(view);
@@ -246,7 +250,7 @@ static bool scry_sdlg_disassembly_print_instruction(const scry_sdlg_view* view, 
 
 		case SCRY_SDLG_OP_DIALOGUE:
 		{
-			uint64_t		  string_id = 0U;
+			uint64_t		 string_id = 0U;
 			scry_sdlg_string string	   = { 0 };
 
 			if (!scry_sdlg_read_uvarint(view->instructions.data, view->instructions.size, cursor, &string_id) || string_id > UINT32_MAX ||
@@ -265,8 +269,8 @@ static bool scry_sdlg_disassembly_print_instruction(const scry_sdlg_view* view, 
 
 		case SCRY_SDLG_OP_CHOICE:
 		{
-			uint64_t			 table_index = 0U;
-			scry_sdlg_table_entry table	   = { 0 };
+			uint64_t			  table_index = 0U;
+			scry_sdlg_table_entry table		  = { 0 };
 
 			if (!scry_sdlg_read_uvarint(view->instructions.data, view->instructions.size, cursor, &table_index) || table_index > UINT32_MAX ||
 				!scry_sdlg_table_at(view, (uint32_t)table_index, &table))
@@ -284,8 +288,8 @@ static bool scry_sdlg_disassembly_print_instruction(const scry_sdlg_view* view, 
 
 		case SCRY_SDLG_OP_SWITCH:
 		{
-			uint64_t			 table_index = 0U;
-			scry_sdlg_table_entry table	   = { 0 };
+			uint64_t			  table_index = 0U;
+			scry_sdlg_table_entry table		  = { 0 };
 
 			if (!scry_sdlg_read_uvarint(view->instructions.data, view->instructions.size, cursor, &table_index) || table_index > UINT32_MAX ||
 				!scry_sdlg_table_at(view, (uint32_t)table_index, &table))
@@ -303,10 +307,10 @@ static bool scry_sdlg_disassembly_print_instruction(const scry_sdlg_view* view, 
 
 		case SCRY_SDLG_OP_COMPARE:
 		{
-			uint64_t	 variable_id	= 0U;
-			uint64_t	 compare_op		= 0U;
-			int64_t		 compare_value = 0;
-			const char* compare_name	= NULL;
+			uint64_t	variable_id	  = 0U;
+			uint64_t	compare_op	  = 0U;
+			int64_t		compare_value = 0;
+			const char* compare_name  = NULL;
 
 			if (!scry_sdlg_read_uvarint(view->instructions.data, view->instructions.size, cursor, &variable_id) ||
 				!scry_sdlg_read_uvarint(view->instructions.data, view->instructions.size, cursor, &compare_op) ||
@@ -369,11 +373,14 @@ static bool scry_sdlg_disassembly_print_tables(const scry_sdlg_view* view, FILE*
 	return true;
 }
 
-static bool scry_sdlg_disassembly_print_choice_table(
-	const scry_sdlg_view* view, FILE* output, uint32_t table_index, const scry_sdlg_table_entry* table, size_t base_ip)
+static bool scry_sdlg_disassembly_print_choice_table(const scry_sdlg_view*		  view,
+													 FILE*						  output,
+													 uint32_t					  table_index,
+													 const scry_sdlg_table_entry* table,
+													 size_t						  base_ip)
 {
-	scry_sdlg_span payload	  = { 0 };
-	uint16_t	   option_count = 0U;
+	scry_sdlg_span payload		 = { 0 };
+	uint16_t	   option_count	 = 0U;
 	size_t		   expected_size = 0U;
 
 	ASSERT_FATAL(view);
@@ -396,21 +403,15 @@ static bool scry_sdlg_disassembly_print_choice_table(
 	for (uint16_t option_index = 0U; option_index < option_count; ++option_index)
 	{
 		scry_sdlg_disassembly_choice_option option = { 0 };
-		scry_sdlg_string					 string = { 0 };
+		scry_sdlg_string					string = { 0 };
 
-		if (!scry_sdlg_disassembly_read_choice_option(&payload, option_index, &option) ||
-			!scry_sdlg_string_at(view, option.text_string_id, &string))
+		if (!scry_sdlg_disassembly_read_choice_option(&payload, option_index, &option) || !scry_sdlg_string_at(view, option.text_string_id, &string))
 		{
 			return false;
 		}
 
-		if (fprintf(output,
-					"    option[%" PRIu16 "] table[%" PRIu32 "] string[%" PRIu32 "]=",
-					option_index,
-					table_index,
-					option.text_string_id) < 0 ||
-			!scry_sdlg_disassembly_print_string_literal(output, string.data, string.length) ||
-			fprintf(output, " delta=%" PRId32, option.target_delta) < 0 ||
+		if (fprintf(output, "    option[%" PRIu16 "] table[%" PRIu32 "] string[%" PRIu32 "]=", option_index, table_index, option.text_string_id) < 0 ||
+			!scry_sdlg_disassembly_print_string_literal(output, string.data, string.length) || fprintf(output, " delta=%" PRId32, option.target_delta) < 0 ||
 			!scry_sdlg_disassembly_print_jump_target(output, base_ip, option.target_delta, view->instructions.size) || fputc('\n', output) == EOF)
 		{
 			return false;
@@ -420,8 +421,11 @@ static bool scry_sdlg_disassembly_print_choice_table(
 	return true;
 }
 
-static bool scry_sdlg_disassembly_print_switch_table(
-	const scry_sdlg_view* view, FILE* output, uint32_t table_index, const scry_sdlg_table_entry* table, size_t base_ip)
+static bool scry_sdlg_disassembly_print_switch_table(const scry_sdlg_view*		  view,
+													 FILE*						  output,
+													 uint32_t					  table_index,
+													 const scry_sdlg_table_entry* table,
+													 size_t						  base_ip)
 {
 	scry_sdlg_span payload		 = { 0 };
 	uint16_t	   case_count	 = 0U;
@@ -463,11 +467,7 @@ static bool scry_sdlg_disassembly_print_switch_table(
 			return false;
 		}
 
-		if (fprintf(output,
-					"    case[%" PRIu16 "] value=%" PRId32 " delta=%" PRId32,
-					case_index,
-					switch_case.value,
-					switch_case.target_delta) < 0 ||
+		if (fprintf(output, "    case[%" PRIu16 "] value=%" PRId32 " delta=%" PRId32, case_index, switch_case.value, switch_case.target_delta) < 0 ||
 			!scry_sdlg_disassembly_print_jump_target(output, base_ip, switch_case.target_delta, view->instructions.size) || fputc('\n', output) == EOF)
 		{
 			return false;
@@ -602,8 +602,7 @@ static bool scry_sdlg_disassembly_print_string_literal(FILE* output, const char*
 	return fputc('"', output) != EOF;
 }
 
-static bool scry_sdlg_disassembly_read_choice_option(
-	const scry_sdlg_span* payload, uint16_t option_index, scry_sdlg_disassembly_choice_option* out_option)
+static bool scry_sdlg_disassembly_read_choice_option(const scry_sdlg_span* payload, uint16_t option_index, scry_sdlg_disassembly_choice_option* out_option)
 {
 	const size_t offset = sizeof(scry_sdlg_choice_table_header) + ((size_t)option_index * (sizeof(uint32_t) + sizeof(int32_t)));
 
@@ -614,8 +613,7 @@ static bool scry_sdlg_disassembly_read_choice_option(
 		   scry_sdlg_disassembly_read_s32_le(payload->data, payload->size, offset + sizeof(uint32_t), &out_option->target_delta);
 }
 
-static bool scry_sdlg_disassembly_read_switch_case(
-	const scry_sdlg_span* payload, uint16_t case_index, scry_sdlg_disassembly_switch_case* out_case)
+static bool scry_sdlg_disassembly_read_switch_case(const scry_sdlg_span* payload, uint16_t case_index, scry_sdlg_disassembly_switch_case* out_case)
 {
 	const size_t offset = sizeof(scry_sdlg_switch_table_header) + ((size_t)case_index * (sizeof(int32_t) + sizeof(int32_t)));
 
