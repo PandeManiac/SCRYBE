@@ -1,7 +1,7 @@
-#include "utils/scry_string_pool.h"
+#include "utils/text/scry_string_pool.h"
 
-#include "utils/scry_assert.h"
-#include "utils/scry_storage.h"
+#include "utils/core/scry_assert.h"
+#include "utils/core/scry_storage.h"
 
 #include <limits.h>
 #include <stdlib.h>

@@ -1,6 +1,6 @@
 #include "vm/scry_sdlg_loader.h"
 
-#include "utils/scry_file.h"
+#include "utils/io/scry_file.h"
 
 #include <inttypes.h>
 #include <stdio.h>

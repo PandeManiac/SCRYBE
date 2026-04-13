@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utils/scry_assert.h"
+#include "utils/core/scry_assert.h"
 
 #include <stdbool.h>
 #include <stddef.h>

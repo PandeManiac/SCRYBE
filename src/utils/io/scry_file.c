@@ -1,6 +1,6 @@
-#include "utils/scry_file.h"
+#include "utils/io/scry_file.h"
 
-#include "utils/scry_assert.h"
+#include "utils/core/scry_assert.h"
 
 #include <stdio.h>
 #include <stdlib.h>

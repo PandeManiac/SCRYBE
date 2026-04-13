@@ -1,6 +1,6 @@
-#include "utils/scry_hash_map.h"
+#include "utils/collections/scry_hash_map.h"
 
-#include "utils/scry_assert.h"
+#include "utils/core/scry_assert.h"
 
 #include <stdlib.h>
 #include <string.h>

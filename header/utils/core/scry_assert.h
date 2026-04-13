@@ -2,7 +2,7 @@
 
 // #define SCRY_ASSERT_QUIET
 
-#include "utils/scry_hints.h"
+#include "utils/core/scry_hints.h"
 
 NORETURN void scry_assert_fail(const char* expr, const char* file, int line);
 
