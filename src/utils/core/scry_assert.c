@@ -1,5 +1,5 @@
-#include "utils/scry_assert.h"
-#include "utils/scry_hints.h"
+#include "utils/core/scry_assert.h"
+#include "utils/core/scry_hints.h"
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,4 +1,4 @@
-#include "utils/scry_string_utils.h"
+#include "utils/text/scry_string_utils.h"
 
 #include <ctype.h>
 #include <string.h>

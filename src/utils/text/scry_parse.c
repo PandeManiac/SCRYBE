@@ -1,6 +1,6 @@
-#include "utils/scry_parse.h"
+#include "utils/text/scry_parse.h"
 
-#include "utils/scry_assert.h"
+#include "utils/core/scry_assert.h"
 
 #include <limits.h>
 #include <stddef.h>

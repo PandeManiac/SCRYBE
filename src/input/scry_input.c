@@ -1,6 +1,6 @@
 #include "input/scry_input.h"
 
-#include "utils/scry_assert.h"
+#include "utils/core/scry_assert.h"
 
 #include <string.h>
 

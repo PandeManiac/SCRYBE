@@ -1,4 +1,4 @@
-#include "utils/scry_assert.h"
+#include "utils/core/scry_assert.h"
 #include "window/scry_window.h"
 
 #define GLFW_INCLUDE_NONE

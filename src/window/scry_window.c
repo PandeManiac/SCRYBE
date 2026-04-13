@@ -1,6 +1,6 @@
 #include "window/scry_window.h"
 
-#include "utils/scry_assert.h"
+#include "utils/core/scry_assert.h"
 
 #include <GLFW/glfw3.h>
 

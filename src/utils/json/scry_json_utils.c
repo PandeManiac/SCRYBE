@@ -1,5 +1,5 @@
-#include "utils/scry_json_utils.h"
-#include "utils/scry_assert.h"
+#include "utils/json/scry_json_utils.h"
+#include "utils/core/scry_assert.h"
 
 bool scry_json_get_typed(json_object* obj, const char* key, json_type type, json_object** out_value)
 {
