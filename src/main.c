@@ -1,9 +1,13 @@
 #include "utils/core/scry_assert.h"
+#include "vm/scry_dialogue_cli.h"
 #include "window/scry_window.h"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 #include <glad/gl.h>
+
+#include <stdio.h>
+#include <string.h>
 
 static const scry_window_config window_config = {
 	.title = "SCRYBE WINDOW",
@@ -22,8 +26,19 @@ static const scry_window_config window_config = {
 
 static scry_window window = { 0 };
 
-int main(void)
+int main(int argc, char** argv)
 {
+	if (argc == 3 && strcmp(argv[1], "dialogue-run") == 0)
+	{
+		return scry_dialogue_run_file(argv[2]) ? 0 : 1;
+	}
+
+	if (argc != 1)
+	{
+		(void)fprintf(stderr, "usage: %s [dialogue-run <path>]\n", argv[0]);
+		return 1;
+	}
+
 	ASSERT_FATAL(glfwInit());
 
 	scry_window_init(&window, &window_config);
