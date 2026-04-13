@@ -78,26 +78,9 @@
             "command": "bash",
             "args": [
                 "-lc",
-                "cmake --build --preset $(cat .cmake_preset) --target run"
+                "preset=$(cat .cmake_preset) && \"${workspaceFolder}/tools/run_external.sh\" \"${workspaceFolder}/build/$preset/SCRYBE\""
             ],
             "dependsOn": ["SCRYBE: Build"],
-            "presentation": {
-                "panel": "shared",
-                "reveal": "always",
-                "focus": true
-            }
-        },
-
-        {
-            "label": "SCRYBE: Manual Dialogue Test",
-            "type": "shell",
-            "command": "bash",
-            "args": [
-                "-lc",
-                "preset=$(cat .cmake_preset) && cmake --build --preset \"$preset\" --target SCRYBE_manual_dialogue_test && \"${workspaceFolder}/build/$preset/SCRYBE_manual_dialogue_test\""
-            ],
-            "dependsOn": ["SCRYBE: Build"],
-            "group": { "kind": "test", "isDefault": true },
             "presentation": {
                 "panel": "shared",
                 "reveal": "always",
