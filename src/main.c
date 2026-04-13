@@ -25,7 +25,6 @@ static scry_window window = { 0 };
 int main(void)
 {
 	ASSERT_FATAL(glfwInit());
-
 	scry_window_init(&window, &window_config);
 	ASSERT_FATAL(gladLoaderLoadGL());
 
