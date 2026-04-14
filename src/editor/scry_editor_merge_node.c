@@ -22,11 +22,9 @@ void scry_editor_merge_node_destroy(scry_editor_merge_node* merge_node)
 scry_editor_merge_node* scry_editor_merge_node_create(void)
 {
 	scry_editor_merge_node* merge_node = malloc(sizeof(*merge_node));
-
 	ASSERT_FATAL(merge_node);
 
 	scry_editor_merge_node_init(merge_node);
-
 	return merge_node;
 }
 

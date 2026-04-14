@@ -42,11 +42,9 @@ void scry_editor_dialogue_node_set_text(scry_editor_dialogue_node* dialogue_node
 scry_editor_dialogue_node* scry_editor_dialogue_node_create(void)
 {
 	scry_editor_dialogue_node* dialogue_node = malloc(sizeof(*dialogue_node));
-
 	ASSERT_FATAL(dialogue_node);
 
 	scry_editor_dialogue_node_init(dialogue_node);
-
 	return dialogue_node;
 }
 

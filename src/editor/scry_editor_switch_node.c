@@ -24,11 +24,9 @@ void scry_editor_switch_node_destroy(scry_editor_switch_node* switch_node)
 scry_editor_switch_node* scry_editor_switch_node_create(void)
 {
 	scry_editor_switch_node* switch_node = malloc(sizeof(*switch_node));
-
 	ASSERT_FATAL(switch_node);
 
 	scry_editor_switch_node_init(switch_node);
-
 	return switch_node;
 }
 
@@ -46,7 +44,6 @@ void scry_editor_switch_node_append_case(scry_editor_switch_node* switch_node, i
 	ASSERT_FATAL(out_case_index);
 
 	scry_editor_switch_case switch_case = { 0 };
-
 	ASSERT_FATAL(SCRY_STORAGE_RESERVE(switch_node->cases, switch_node->case_capacity, switch_node->case_count + 1U, 4U));
 
 	switch_case.value							= value;

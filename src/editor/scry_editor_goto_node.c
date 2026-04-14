@@ -42,11 +42,9 @@ void scry_editor_goto_node_set_title(scry_editor_goto_node* goto_node, const cha
 scry_editor_goto_node* scry_editor_goto_node_create(void)
 {
 	scry_editor_goto_node* goto_node = malloc(sizeof(*goto_node));
-
 	ASSERT_FATAL(goto_node);
 
 	scry_editor_goto_node_init(goto_node);
-
 	return goto_node;
 }
 

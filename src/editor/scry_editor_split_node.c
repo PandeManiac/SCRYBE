@@ -22,11 +22,9 @@ void scry_editor_split_node_destroy(scry_editor_split_node* split_node)
 scry_editor_split_node* scry_editor_split_node_create(void)
 {
 	scry_editor_split_node* split_node = malloc(sizeof(*split_node));
-
 	ASSERT_FATAL(split_node);
 
 	scry_editor_split_node_init(split_node);
-
 	return split_node;
 }
 
