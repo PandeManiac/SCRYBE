@@ -5,6 +5,8 @@
 #include <GLFW/glfw3.h>
 #include <glad/gl.h>
 
+#include <stdlib.h>
+
 static const scry_window_config window_config = {
 	.title = "SCRYBE WINDOW",
 	.pos   = { { 0, 0 } },
